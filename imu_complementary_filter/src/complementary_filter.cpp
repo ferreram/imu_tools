@@ -37,11 +37,11 @@
 
 namespace imu_tools {
 
-const double ComplementaryFilter::kGravity = 9.81;
+const double ComplementaryFilter::kGravity = 9.55;
 const double ComplementaryFilter::gamma_ = 0.01;
 // Bias estimation steady state thresholds
 const double ComplementaryFilter::kAngularVelocityThreshold = 0.2;
-const double ComplementaryFilter::kAccelerationThreshold = 0.2; // Original value: 0.1
+const double ComplementaryFilter::kAccelerationThreshold = 0.1; // Original value: 0.1
 const double ComplementaryFilter::kDeltaAngularVelocityThreshold = 0.05;
 
 ComplementaryFilter::ComplementaryFilter() :
@@ -267,15 +267,7 @@ bool ComplementaryFilter::checkState(double ax, double ay, double az,
 {
   double acc_magnitude = sqrt(ax*ax + ay*ay + az*az);
   
-  /*
-  std::cout << "Acc Magnitude : " << acc_magnitude << std::endl;
-  std::cout << "Wx - Wx_prev_ : " << wx - wx_prev_ << std::endl;
-  std::cout << "Wy - Wy_prev_ : " << wy - wy_prev_ << std::endl;
-  std::cout << "Wz - Wz_prev_ : " << wz - wz_prev_ << std::endl;
-  std::cout << "Wx - Wx_bias_ : " << wx - wx_bias_ << std::endl;
-  std::cout << "Wy - Wy_bias_ : " << wy - wy_bias_ << std::endl;
-  std::cout << "Wz - Wz_bias_ : " << wz - wz_bias_ << std::endl;
-  */
+  //std::cout << "Acc Magnitude : " << acc_magnitude << std::endl;
   
   if (fabs(acc_magnitude - kGravity) > kAccelerationThreshold)
     return false;
